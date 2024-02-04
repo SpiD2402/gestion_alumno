@@ -1,0 +1,99 @@
+-- Database: gestion_alumnos
+
+-- DROP DATABASE IF EXISTS gestion_alumnos;
+CREATE TABLE usuarios (
+  id_usuario SERIAL PRIMARY KEY,
+  email VARCHAR(100),
+  password_usuario VARCHAR(255), 
+  rol VARCHAR(50)
+	status integer,
+user_create VARCHAR(45),
+  user_modif VARCHAR(45),
+	user_delete VARCHAR(45),
+  date_modif TIMESTAMP ,
+  date_delete TIMESTAMP,
+	date_create TIMESTAMP
+);
+
+CREATE TABLE alumnos (
+  id_alumno SERIAL PRIMARY KEY,
+  nombres VARCHAR(100),
+  apellidos VARCHAR(100),
+  dni VARCHAR(8),
+	status integer,
+user_create VARCHAR(45),
+  user_modif VARCHAR(45),
+	user_delete VARCHAR(45),
+  date_modif TIMESTAMP ,
+  date_delete TIMESTAMP,
+	date_create TIMESTAMP
+);
+
+CREATE TABLE cursos (
+  id_curso SERIAL PRIMARY KEY,
+  nombre VARCHAR(100),
+	status integer,
+user_create VARCHAR(45),
+  user_modif VARCHAR(45),
+	user_delete VARCHAR(45),
+  date_modif TIMESTAMP ,
+  date_delete TIMESTAMP,
+	date_create TIMESTAMP
+);
+
+CREATE TABLE profesores (
+  id_profesor SERIAL PRIMARY KEY,
+  nombres VARCHAR(100),
+  apellidos VARCHAR(100),
+  dni VARCHAR(8),
+	status integer,
+ user_create VARCHAR(45),
+  user_modif VARCHAR(45),
+	user_delete VARCHAR(45),
+  date_modif TIMESTAMP ,
+  date_delete TIMESTAMP,
+	date_create TIMESTAMP
+);
+
+CREATE TABLE asignaciones (
+  id SERIAL PRIMARY KEY,
+  id_profesor INT,
+  id_curso INT,
+  FOREIGN KEY (id_profesor) REFERENCES profesores(id_profesor),
+  FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+);
+
+CREATE TABLE matriculas (
+  id_matricula SERIAL PRIMARY KEY, 
+  id_alumno INT,
+  id_curso INT,
+	status integer,
+  fecha_matricula TIMESTAMP,
+ user_create VARCHAR(45),
+  user_modif VARCHAR(45),
+	user_delete VARCHAR(45),
+  date_modif TIMESTAMP ,
+  date_delete TIMESTAMP,
+	date_create TIMESTAMP,
+  FOREIGN KEY (id_alumno) REFERENCES alumnos(id_alumno),
+  FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)
+);
+
+CREATE TABLE notas (
+  id SERIAL PRIMARY KEY,
+  id_alumno INT,
+  id_curso INT, 
+	nota1 NUMERIC,
+	nota2 NUMERIC
+  nota3 NUMERIC,
+	promedio NUMERIC,
+	status integer,
+user_create VARCHAR(45),
+  user_modif VARCHAR(45),
+	user_delete VARCHAR(45),
+  date_modif TIMESTAMP ,
+  date_delete TIMESTAMP,
+	date_create TIMESTAMP,
+  FOREIGN KEY (id_alumno) REFERENCES alumnos(id_alumno),
+  FOREIGN KEY (id_curso) REFERENCES cursos(id_curso)  
+);
